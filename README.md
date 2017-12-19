@@ -2,7 +2,7 @@
 This adds simple HATEOAS with JSON support for ASP.NET Core MVC applications.
 
 ## Getting started
-The JSON HATEOAS provider extends the `IMvcBuilder` and is added like the following:
+The JSON HATEOAS provider extends the `IMvcBuilder` and is used like the following:
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
@@ -46,6 +46,7 @@ public class PeopleController : Controller
     [HttpDelete("{id}", Name = "delete-person")]
     public IActionResult Delete(int id) {...}
 }
+```
 
 Wire up HATEOAS with the particular links:
 ```csharp
