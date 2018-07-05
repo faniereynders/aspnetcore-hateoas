@@ -61,7 +61,7 @@ namespace AspNetCore.Hateoas.Formatters
                 resource = CreateResource(context.ObjectType, context.Object, options, actionDescriptorProvider, urlHelper);
             }
             var output = JsonConvert.SerializeObject(resource, serializerSettings);
-            response.ContentType = "application/json";
+            response.ContentType = "application/json+hateoas";
             return response.WriteAsync(output);
         }
 
