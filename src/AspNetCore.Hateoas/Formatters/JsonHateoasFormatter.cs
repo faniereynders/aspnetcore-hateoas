@@ -45,6 +45,14 @@ namespace AspNetCore.Hateoas.Formatters
             };
 
             var resource = default(Resource);
+            
+            if (context.Object is SerializableError error)
+            {
+                var errorOutput = JsonConvert.SerializeObject(error, serializerSettings);
+                response.ContentType = "application/json";
+                return response.WriteAsync(errorOutput);
+            }
+            
             var result = context.Object;
 
             if (context.ObjectType.GetInterfaces().Contains(typeof(IEnumerable)))
