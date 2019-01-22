@@ -74,7 +74,7 @@ Accept: application/json+hateoas
 ```
 
 Will result in the following response:
-````json
+```json
 {
     "_links": [
         {
