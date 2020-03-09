@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 #if NETCOREAPP3_0
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
 #elif NETSTANDARD2_0
-    using Microsoft.AspNetCore.Mvc.Internal;
+using Microsoft.AspNetCore.Mvc.Internal;
 #endif
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
