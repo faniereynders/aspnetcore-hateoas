@@ -9,7 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
+#if NETCOREAPP3_0 || NETCOREAPP3_1
+using Microsoft.Extensions.Hosting;
+#endif
 namespace BasicExample
 {
     public class Startup
@@ -24,8 +26,9 @@ namespace BasicExample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services
-                .AddMvc()
+                .AddControllers()
                 .AddHateoas(options =>
                 {
                     options
@@ -37,14 +40,24 @@ namespace BasicExample
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
+#if NETCOREAPP3_0 || NETCOREAPP3_1
+            app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+#elif NETCOREAPP2
             app.UseMvc();
+#endif
         }
     }
 }
