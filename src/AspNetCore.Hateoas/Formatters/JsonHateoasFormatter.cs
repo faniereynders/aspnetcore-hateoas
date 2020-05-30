@@ -2,7 +2,7 @@
 using AspNetCore.Hateoas.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-#if NETCOREAPP3_0
+#if NETCOREAPP3_0 || NETCOREAPP3_1
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
 #elif NETSTANDARD2_0
 using Microsoft.AspNetCore.Mvc.Internal;
