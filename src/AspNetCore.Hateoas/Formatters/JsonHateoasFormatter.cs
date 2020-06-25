@@ -91,7 +91,7 @@ namespace AspNetCore.Hateoas.Formatters
             {
                 resource = new ObjectResource(value);
             }
-            foreach (var option in resourceOptions)
+            foreach (var option in resourceOptions.Where(x => x.IsEnabled(value)))
             {
                 var route = actionDescriptorProvider.ActionDescriptors.Items.FirstOrDefault(i => i.AttributeRouteInfo.Name == option.Name);
                 var method = route.ActionConstraints.OfType<HttpMethodActionConstraint>().First().HttpMethods.First();

@@ -21,7 +21,7 @@ namespace AspNetCore.Hateoas.Infrastructure
             }
         }
 
-        public HateoasOptions AddLink<T>(string routeName, Func<T, object> values) where T : class
+        public HateoasOptions AddLink<T>(string routeName, Func<T, object> values, Func<T, bool> condition = null) where T : class
         {
             Func<T, RouteValueDictionary> getRouteValues = r => new RouteValueDictionary();
             if (values != null)
@@ -29,15 +29,15 @@ namespace AspNetCore.Hateoas.Infrastructure
                 getRouteValues = r => new RouteValueDictionary(values(r));
             }
                 
-            var req = new ResourceLink<T>(typeof(T), routeName, getRouteValues);
+            var req = new ResourceLink<T>(typeof(T), routeName, getRouteValues, condition ?? (_ => true));
 
             links.Add(req);
             return this;
         }
 
-        public HateoasOptions AddLink<T>(string routeName) where T : class
+        public HateoasOptions AddLink<T>(string routeName, Func<T, bool> condition = null) where T : class
         {
-            return AddLink<T>(routeName, t => null);
+            return AddLink<T>(routeName, t => null, condition);
         }
     }
 

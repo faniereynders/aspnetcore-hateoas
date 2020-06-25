@@ -14,7 +14,7 @@ namespace BasicExample.Controllers
             people = new List<PersonDto>() {
                 new PersonDto { Id = 1, Name = "Fanie", Email = "fanie@reynders.co" },
                 new PersonDto { Id = 2, Name = "Maarten", Email = "maarten@example.com" },
-                new PersonDto { Id = 3, Name = "Marcel", Email = "marcel@example.com" }
+                new PersonDto { Id = 3, Name = "Marcel", Email = "marcel@example.com", IsReadOnly = true }
             };
         }
 
@@ -50,6 +50,7 @@ namespace BasicExample.Controllers
 
             oldPerson.Name = person.Name;
             oldPerson.Email = person.Email;
+            oldPerson.IsReadOnly = person.IsReadOnly;
             return NoContent();
         }
         
